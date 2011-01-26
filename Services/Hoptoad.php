@@ -228,7 +228,7 @@ class Services_Hoptoad
 
 		$error = $doc->addChild('error');
 		$error->addChild('class', $this->error_class);
-		$error->addChild('message', $this->message);
+		$error->addChild('message', '('.$this->translate_error_class($this->error_class).') ' . $this->message);
 		$this->addXmlBacktrace($error);
 
 		$request = $doc->addChild('request');
@@ -463,4 +463,35 @@ class Services_Hoptoad
 
 		return $response->getStatus();
 	}
+	
+	/**
+	 *
+	 **/
+	private function translate_error_class($error_class)
+	{
+	  $errors = array(
+	    1     => 'E_ERROR',
+	    2     => 'E_WARNING',
+	    4     => 'E_PARSE',
+	    8     => 'E_NOTICE', 
+	    16    => 'E_CORE_ERROR',
+  	  32    => 'E_CORE_WARNING',
+  	  64    => 'E_COMPILE_ERROR',
+  	  128   => 'E_COMPILE_WARNING',
+  	  256   => 'E_USER_ERROR',
+  	  512   => 'E_USER_WARNING',
+  	  1024  => 'E_USER_NOTICE',
+  	  2048  => 'E_STRICT',
+  	  4096  => 'E_RECOVERABLE_ERROR',
+  	  8192  => 'E_DEPRECATED',
+  	  16384 => 'E_USER_DEPRECATED',
+  	  30719 => 'E_ALL'
+	  );
+	  
+	  if (array_key_exists($error_class, $errors)) {
+	    return $errors[$error_class];
+	  } else {
+	    return $error_class;
+	  }
+	}	
 }
