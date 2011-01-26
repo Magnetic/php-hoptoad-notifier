@@ -132,7 +132,7 @@ class Services_Hoptoad
 	public function errorHandler($code, $message, $file, $line)
 	{
 		if ($code == E_STRICT && $this->reportESTRICT === false) return;
-
+    if ($code == E_NOTICE) return;
 		$this->notify($code, $message, $file, $line, debug_backtrace());
 	}
 
