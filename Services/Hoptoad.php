@@ -372,8 +372,7 @@ class Services_Hoptoad
 		}
 		$host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 		$path = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-		$query_string = isset($_SERVER['QUERY_STRING']) && !empty($_SERVER['QUERY_STRING']) ? ('?' . $_SERVER['QUERY_STRING']) : '';
-		return "{$protocol}://{$host}{$path}{$query_string}";
+		return "{$protocol}://{$host}{$path}";
 	}
 
 	/**
