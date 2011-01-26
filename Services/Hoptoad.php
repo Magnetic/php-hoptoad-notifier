@@ -232,7 +232,7 @@ class Services_Hoptoad
 		$this->addXmlBacktrace($error);
 
 		$request = $doc->addChild('request');
-		$request->addChild('url', $this->request_uri());
+		$request->addChild('url', htmlentities($this->request_uri()));
 		$request->addChild('component', $this->component());
 		$request->addChild('action', $this->action());
 
