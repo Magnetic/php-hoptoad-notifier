@@ -258,6 +258,9 @@ class Services_Hoptoad
 
 		$node = $parent->addChild($key);
 		foreach ($source as $key => $val) {
+		  if (is_array($val)) {
+		    $val = implode('|', $val);
+		  }		  
 			$var_node = $node->addChild('var', htmlentities($val));
 			$var_node->addAttribute('key', $key);
 		}
